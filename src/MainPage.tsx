@@ -11,7 +11,6 @@ export function MainPage() {
 
     return <div>
         <div style={{display: 'flex', gap: '40px'}}>
-            <h1>Musicfun Player</h1>
             <TracksList
                 selectedTrackId={trackId}
                 onTrackSelect={handleTrackSelect} />
