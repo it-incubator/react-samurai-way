@@ -3,17 +3,12 @@ import {TrackDetail} from "./ui/TrackDetail.tsx";
 import {useTrackSelection} from "./bll/useTrackSelection.tsx";
 
 export function MainPage() {
-    const {trackId, setTrackId} = useTrackSelection()
+    const {trackId} = useTrackSelection()
 
-    const handleTrackSelect =  (id: string | null): void => {
-        setTrackId(id)
-    }
 
     return <div>
         <div style={{display: 'flex', gap: '40px'}}>
-            <TracksList
-                selectedTrackId={trackId}
-                onTrackSelect={handleTrackSelect} />
+            <TracksList selectedTrackId={trackId} />
             <TrackDetail trackId={trackId}/>
         </div>
     </div>

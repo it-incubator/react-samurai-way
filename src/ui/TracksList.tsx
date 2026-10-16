@@ -4,7 +4,7 @@ import styles from "./TracksList.module.css";
 
 type Props = {
     selectedTrackId: string | null
-    onTrackSelect: (id: string | null) => void
+    onTrackSelect?: (id: string | null) => void
 }
 
 

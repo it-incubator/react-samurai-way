@@ -1,10 +1,11 @@
 import type {TrackListItemOutput} from "../dal/api.ts";
 import styles from "./TracksList.module.css";
 import clsx from "clsx";
+import {Link} from "react-router";
 
 type Props = {
     isSelected: boolean
-    onSelect: (trackId: string) => void
+    onSelect?: (trackId: string) => void
     track: TrackListItemOutput
 }
 
@@ -17,9 +18,9 @@ export function TrackItem({onSelect, track, isSelected}: Props) {
     })
 
     return <li  className={className} key={track.id}>
-        <div onClick={handleClick}>
+        <Link onClick={handleClick} to={`/tracks/${track.id}`}>
             {track.attributes.title.toUpperCase()}
-        </div>
+        </Link>
         <audio src={track.attributes.attachments[0].url} controls></audio>
     </li>
 }
