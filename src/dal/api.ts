@@ -22,7 +22,17 @@ const prepareHeaders = () => {
 export const getTrack = (trackId: string) => {
     const promise: Promise<GetTrackDetailsOutput> = fetch('https://musicfun.it-incubator.app/api/1.0/playlists/tracks/' + trackId, {
         headers: prepareHeaders()
-    }).then(res => res.json())
+    }).then(res => {
+        if (!res.ok) {
+
+            if (res.status === 404) {
+                throw new NotFoundError(`Track with id ${trackId} not found`)
+            }
+            throw new Error('Unable to get track with id ' + trackId)
+        }
+
+        return res.json();
+    })
 
     return promise
 }
@@ -49,4 +59,10 @@ export const getTracks = () => {
     }).then(res => res.json())
 
     return promise;
+}
+
+export class NotFoundError extends Error {
+    constructor(message: string) {
+        super(message)
+    }
 }

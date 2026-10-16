@@ -2,7 +2,7 @@ import {MainPage} from "../MainPage.tsx";
 import {Header} from "./Header.tsx";
 import {Footer} from "./Footer.tsx";
 import {SidebarMenu} from "./SidebarMenu.tsx";
-import {BrowserRouter, Route, Routes} from "react-router";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router";
 import {NotFound} from "./NotFound.tsx";
 
 export const App = () => {
@@ -15,7 +15,8 @@ export const App = () => {
                     <Routes>
                         <Route path="/" element={<MainPage />}/>
                         <Route path="/tracks/:trackId" element={<MainPage />}/>
-                        <Route path="*" element={<NotFound />}/>
+                        <Route path="/not-found" element={<NotFound />}/>
+                        <Route path="*" element={<Navigate to={'/not-found'}/>}/>
                     </Routes>
                 </div>
                 <Footer/>

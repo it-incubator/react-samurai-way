@@ -1,6 +1,8 @@
 import {useTrackDetail} from "../bll/useTrackDetail.tsx";
 
 import styles from "./TrackDetail.module.css"
+import {Navigate} from "react-router";
+import {NotFoundError} from "../dal/api.ts";
 
 type Props = {
     trackId: string | null
@@ -8,7 +10,10 @@ type Props = {
 
 
 export function TrackDetail({trackId}: Props) {
-    const {trackDetails} = useTrackDetail(trackId)
+    const {trackDetails, error} = useTrackDetail(trackId)
+
+    if (error && error instanceof NotFoundError) return <Navigate to={'/not-found'}/>
+    if (error) return <div>Some error occurred</div>
 
     return <div className={styles.track}>
         <h2>Details</h2>
